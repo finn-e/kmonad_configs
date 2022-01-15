@@ -144,24 +144,27 @@ Base Transparency
   q_ro ins
 )
 
-(defalias ;; autocaps and home row mod-taps for adhd
+(defalias ;; ada autocaps and home row mod-taps
   ;; left hand
   ;;top row
-  .L (tap-hold 150 (layer-next ada-dot) (tap-hold-next-release 300 ! (layer-toggle ada-dot)))
-  ,L (tap-hold 150 (layer-next ada-comma) (tap-hold-next-release 300 ? (layer-toggle ada-comma)))
-  q (tap-hold 150 (layer-next ada-q) (tap-hold-next-release 300 Q (layer-toggle ada-q)))
-  u (tap-hold 150 u U)
-  tab tab
-  ;; home row
-  a (tap-hold 150 a (tap-hold-next-release 300 A lshift))
-  o (tap-hold 150 o (tap-hold-next-release 300 O lalt))
-  e (tap-hold 150 e (tap-hold-next-release 300 E lctrl))
-  i (tap-hold 150 i (tap-hold-next-release 300 I lmeta))
-  ;; bottom row
-  ;L (tap-hold 150 (layer-next ada-semicolon) (tap-hold-next-release 300 : (layer-toggle ada-semicolon)))
   k (tap-hold 150 k K)
   y (tap-hold 150 y Y)
+  o (tap-hold 150 o O)
+  u (tap-hold 150 u U)
+  ;; home row
+  h (tap-hold 150 h (tap-hold-next-release 300 H lshift))
+  i (tap-hold 150 i (tap-hold-next-release 300 I lalt))
+  a (tap-hold 150 a (tap-hold-next-release 300 A lctrl))
+  e (tap-hold 150 e (tap-hold-next-release 300 E lmeta))
+  qL (tap-hold 150 (layer-next ada-q) (tap-hold-next-release 300 Q (layer-toggle ada-q)))
+  ;; bottom row
+  . (tap-hold 150 . !)
+  ;L (tap-hold 150 (layer-next ada-semicolon) (tap-hold-next-release 300 : (layer-toggle ada-semicolon)))
+  |L (tap-hold 150 (layer-next ada-bar) (tap-hold-next-release 300 | (layer-toggle ada-bar)))
+  j (tap-hold 150 j J)
+  tab tab
   ret ret
+  z (tap-hold 150 z Z)
   ;; thumbs
   del del
   bsp bspc
@@ -169,84 +172,64 @@ Base Transparency
 
   ;; right hand
   ;; top row
-  p (tap-hold 150 p P)
-	l (tap-hold 150 l L)
+  g (tap-hold 150 g G)
+	m (tap-hold 150 m M)
 	f (tap-hold 150 f F)
-  v (tap-hold 150 v V)
+	w (tap-hold 150 w W)
+	dqL (tap-hold 150 (layer-next ada-dblquote) (tap-hold-next-release 300 ' (layer-toggle ada-dblquote)))
   ;; home row
-  d (tap-hold 150 d (tap-hold-next-release 300 D rmeta))
+  b (tap-hold 150 b B)
+  t (tap-hold 150 t (tap-hold-next-release 300 T rmeta))
   n (tap-hold 150 n (tap-hold-next-release 300 N rctrl))
   s (tap-hold 150 s (tap-hold-next-release 300 S ralt))
-  r (tap-hold 150 r (tap-hold-next-release 300 R rshift))
+  c (tap-hold 150 c (tap-hold-next-release 300 C rshift))
   ;; bottom row
-  c (tap-hold 150 c (tap-hold-next-release 300 C (layer-toggle ada-dot)))
-	m (tap-hold 150 m M)
-  b (tap-hold 150 b B)
-  w (tap-hold 150 w W)
+	x (tap-hold 150 x X)
+  d (tap-hold 150 d (tap-hold-next-release 300 D (layer-toggle ada-semicolon)))
+	p (tap-hold 150 p P)
+	v (tap-hold 150 v V)
+  &L (tap-hold 150 (layer-next ada-ampersand) (tap-hold-next-release 300 & (layer-toggle ada-ampersand)))
   ;; thumb
-  t (tap-hold 150 t (tap-hold-next-release 300 T (layer-toggle ada-semicolon)))
-  h (tap-hold 150 h (tap-hold-next-release 300 H (layer-toggle ada-dot)))
-  g (tap-hold 150 g (tap-hold-next-release 300 G (layer-toggle ada-comma)))
-  )
-
-(defalias ;; autoshift aliases for ada-dot
-  ;; left hand
-  ;; top row
-  x (tap-hold 150 x X)
-  . (tap-hold 150 . !)
-  ;;tab tab
-  ;;ret ret
-  ;; home row
-  & (tap-hold 150 & |)
-  : (tap-hold 150 : ;)
-  - (tap-hold 150 - +)
-  und (tap-hold 150 \_ =)
-	;; bottom row
-  z (tap-hold 150 z Z)
-  qu #(q u)
-  j (tap-hold 150 j J)
-
-  ;; right hand
-  ;; top row
-  ' (tap-hold 150 ' `)
-  dq (tap-hold 150 " ^)
-  @ (tap-hold 150 @ #)
-	caps caps
-  ;; home row
-  lpn (tap-hold 150 \( <)
-  lbr (tap-hold 150 [ {)
-  rbr (tap-hold 150 ] })
-  rpn (tap-hold 150 \) >)
-  ;; bottom row
-  / (tap-hold 150 / \ )
-  ~ (tap-hold 150 ~ *)
-  2. #(. .)
+  r (tap-hold 150 r (tap-hold-next-release 300 R (layer-toggle ada-semicolon)))
+  l (tap-hold 150 l (tap-hold-next-release 300 L (layer-toggle ada-q)))
+  ,L (tap-hold 150 (layer-next ada-comma) (tap-hold-next-release 300 ? (layer-toggle ada-comma)))
 )
 
-(defalias ;; ada-comma
+(defalias ;; autoshift aliases for ada-comma
+	f@o #(f i n @ o f l a h e r t y . i s)
+	,re #(, return)
+	,ta #(, tab)
+	,sp #(, space)
+	, (tap-hold 150 , ?)
+)
+
+
+(defalias ;; ada-q
   ;; left hand
   ;; top row
-  , (tap-hold 150 , ?)
-	*= #(* =)
-  /= #(/ =)
-  || #(| |)
+;;  k (tap-hold 150 k K)
+	q (tap-hold 150 q Q)
+	qu #(q u)
+;;	v (tap-hold 150 v V)
   ;; home row
-  $ (tap-hold 150 $ %)
-  plu (tap-hold 150 + *)
-  min (tap-hold 150 - /)
-  equ (tap-hold 150 = =)
-  ;; bottom row
-	+= #(+ =)
-	-= #(- =)
-  && #(& &)
+  esc esc
+  o@g #(o f l a h 3 r t y @ g m a i l . c o m)
+	ins insert
+;;	j (tap-hold 150 j J)
+;;	x (tap-hold 150 x X)
+	;; bottom row
+  cap caps
+;;  b (tap-hold 150 b B)
+;;  z (tap-hold 150 z Z)
+  ;; tab tab
 
   ;; right hand
+  ;; top row
   ;; top row
   7 (tap-hold 150 7 &)
   8 (tap-hold 150 8 *)
   9 (tap-hold 150 9 \()
   ;; home row
-  ins ins
   1 (tap-hold 150 1 !)
   2 (tap-hold 150 2 @)
   3 (tap-hold 150 3 #)
@@ -255,17 +238,55 @@ Base Transparency
   4 (tap-hold 150 4 $)
   5 (tap-hold 150 5 %)
   6 (tap-hold 150 6 ^)
-  poi (tap-hold 150 . ,)
-
   ;; thumbs
+  qsp #(q space)
+  qre #(q return)
   00 #(0 0)
+  poi (tap-hold 150 . ,)
 )
 
-(defalias ;; ada-semicolon aliases
-  ; (tap-hold 150 ; :)
+(defalias ;; ada-semicolon
+  ;; left hand
+  ;; top row
+  ;; . (tap-hold 150 . !)
+  / (tap-hold 150 / \\)
+  2: #(: :)
+  2* #(* *)
+  @ (tap-hold 150 @ #)
+  ;; home row
+  % (tap-hold 150 % $)
   2; #(; ;)
-  ;ta #(; tab)
+  2# #(# #)
+  ;; bottom row
+  ; (tap-hold 150 ; :)
+  2- #(- -)
   ;re #(; ret)
+  ;ta #(; tab)
+
+  ;; right hand
+  ;;top row
+  lbr (tap-hold 150 [ {)
+  dq (tap-hold 150 " ^)
+  und (tap-hold 150 \_ =)
+  rbr (tap-hold 150 ] })
+  ;; home row
+  lpn (tap-hold 150 \( <)
+  ' (tap-hold 150 ' `)
+  - (tap-hold 150 - ~)
+  rpn (tap-hold 150 \) >)
+  ;; bottom row
+  ;; / (tap-hold 150 / \\)
+  ~ (tap-hold 150 ~ *)
+  2. #(. .)
+)
+
+(defalias ;; ada-dblquote aliases
+  ;; left hand
+  udo C-z
+  cut C-x
+  cpy C-c
+  pst C-v
+
   F1 (tap-hold 150 F1 (tap-hold-next-release 300 S-F1 lmeta))
   F2 (tap-hold 150 F2 (tap-hold-next-release 300 S-F2 lctrl))
   F3 (tap-hold 150 F3 (tap-hold-next-release 300 S-F3 lalt))
@@ -275,22 +296,23 @@ Base Transparency
   F7 (tap-hold 150 F7 S-F7)
   F8 (tap-hold 150 F8 S-F8)
   F9 (tap-hold 150 F9 S-F9)
-  F10 (tap-hold 150 F10 S-F10)
-  F11 (tap-hold 150 F11 (tap-hold-next-release 300 S-F11 lshift))
+  F10 (tap-hold 150 F11 (tap-hold-next-release 300 S-F10 lshift))
+  F11 (tap-hold 150 F10 S-F11)
   F12 (tap-hold 150 F12 S-F12)
   F13 (tap-hold 150 F13 S-F13)
-
-  cap caps
 )
 
 (defalias ;; layer locks and unlocks
   ,lk (layer-switch ada-comma)
-  .lk (layer-switch ada-dot)
   ;lk (layer-switch ada-semicolon)
+  qlk (layer-switch ada-q)
+  dqlk (layer-switch ada-dblquote)
   ul (layer-switch ada)
 )
 
-(defalias ;; temporary placeholder until l/s/a finalized
+(defalias ;; | &| &
+  2| #(| |)
+  2& #(& &)
   | (tap-hold 150 | \\)
 )
 
@@ -339,56 +361,72 @@ Base Transparency
 
 (deflayer lda
   @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi _
-  _    @'   @,L  @.   @p   @y   @rbr      @lbr @f   @g   @c   @r   @l   _
-  _    @a   @o   @e   @u   @i   @rpn      @lpn @d   @h   @t   @n   @s
-       @;L  @q   @z   @k   @x   @q_/ XX   @q_\ @b   @m   @w   @v   @z
-       XX   XX   @del @bsp @spc      @ret @l   @r   @,L  XX
+  _    @k   @y   @o   @u   @'   @/        @g   @m   @f   @w   _    _    _
+  _    @h   @i   @a   @e   @q   @b        @t   @n   @s   @c   @dqL _
+       @.   @j   @tab @ret @z   @'   @x   @d   @p   @v   @;L  @/   _
+       XX   XX   @del @bsp @spc      @ret @t   @h   @g   XX
 )
 
 (deflayer sda
   @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi _
-  _    @'   @,L  @.   @p   @k   @rbr      @lbr XX   @d   @g   @c   @&L  _
-  _    @a   @o   @e   @i   @y   @rpn      @lpn @f   @h   @t   @n   @s
-       @|L  @;L  @q   @u   @j   @x   XX   @q_/ @b   @m   @w   @v   @z
-       _    _    @del @bsp @spc      @ret @l   @r   @,L  _
+  _    @k   @y   @o   @u   @'   XX        XX   @/   @g   @m   @f   @w   @dqL
+  _    @h   @i   @a   @e   @q   XX        XX   @b   @t   @n   @s   @c
+       @.   @j   @tab @ret @z   XX   XX   XX   @x   @d   @p   @v   @;L
+       _    _    @del @bsp @spc      @ret @r   @l   @,L  _
 )
 
 (deflayer ada
   XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   @'   @,L  @.   @k   XX   XX        XX   XX   @d   @g   @c   @;L  @ret
-  @tab @a   @o   @e   @i   XX   XX        XX   XX   @h   @t   @n   @s
-       XX   @|L  @q   @u   XX   XX   XX   XX   XX   @m   @w   @&L  XX
-       XX   @tab @del @bsp @spc      @ret @l   @r   @,L  XX
-) ;; moved off - fpybvxjz
+  XX   @k   @y   @o   @u   XX   XX        XX   XX   @g   @m   @f   @w   XX
+  XX   @h   @i   @a   @e   XX   XX        XX   XX   @t   @n   @s   @c
+			 @.   @|L  @tab @ret XX   XX   XX   XX   XX   @d   @p   @&L  @;L
+       XX   XX   @del @bsp @spc      @ret @r   @l   @,L  XX
+) ;; moved off - bkvxjz - fix for new
 
 (deflayer ada-comma
   XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   @k   @,   @q   @z   XX   XX        XX   XX   @lbr @dq  @und @rbr XX
-  XX   @&   @ins @x   @j   XX   XX        XX   XX   @lpn @'   @-   @rpn
-       XX   @cap @tab @qu  XX   XX   XX   XX   XX   @/   @~   @2.  XX
-       XX   XX   @.lk @bsp #(, spc)  XX   @t   @h   @ul  XX
-)
-
-(deflayer ada-q
-  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   @k   @,   @tab @z   XX   XX        XX   XX   @lbr @dq  @und @rbr XX
-  XX   @&   @ins @x   @j   XX   XX        XX   XX   @lpn @'   @-   @rpn
-       XX   @cap @q  @qu  XX   XX   XX   XX   XX   @/   @~   @2.  XX
-       XX   XX   @.lk @bsp #(, spc)  XX   @t   @h   @ul  XX
-)
-
-(deflayer ada-dot
-  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   @.   @*=  @/=  @||  XX   XX        XX   XX   @7   @8   @9   @poi XX
-  XX   @$   @plu @min @equ XX   XX        XX   XX   @1   @2   @3   @0
-       XX   @+=  @-=  @&&  XX   XX   XX   XX   XX   @4   @5   @6   @poi
-       XX   XX   @,lk @bsp #(. spc)  XX   @00  @0   @ul  XX
+  XX   XX   XX   XX   @,   XX   XX        XX   XX   XX   XX   XX   XX   XX
+  XX   lsft lalt lctrl lmeta XX   XX      XX   XX   @b   @z   @x   @v
+       XX   @,re @,ta XX   XX   XX   XX   XX   XX   @k   @j   XX   XX
+       XX   XX   @,lk @bsp @,sp      @,re @t   @h   @ul  XX
 )
 
 (deflayer ada-semicolon
   XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   pgup home up   end  XX   XX        XX   XX   @F7  @F8  @F9  @F10 XX
+  XX   @.   @/   @2:  @2*  XX   XX        XX   XX   @lbr @dq  @und @rbr XX
+  XX   @@   @%   @2;  @2#  XX   XX        XX   XX   @lpn @'   @-   @rpn
+       @;   @;re @;ta XX   XX   XX   XX   XX   XX   @/   @~   @2.  XX
+       XX   XX   @;lk @bsp #(; spc)  @;re @t   @h   @ul  XX
+)
+
+(deflayer ada-q
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   @k   @q   @qu  @v   XX   XX        XX   XX   @7   @8   @9   @poi XX
+  XX   @esc @ins @j   @x   XX   XX        XX   XX   @1   @2   @3   @0
+       XX   @cap @b   @z   XX   XX   XX   XX   XX   @4   @5   @6   XX
+       XX   XX   @qlk @bsp @qsp      @qre @00  @poi @ul  XX
+)
+
+(deflayer ada-dblquote
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   pgup home up   end  XX   XX        XX   XX   @F7  @F8  @F9  @F10
   XX   pgdn left down rght XX   XX        XX   XX   @F1  @F2  @F3  @F11
-       @;   @2;  @;ta @;re XX   XX   XX   XX   XX   @F4  @F5  @F6  XX
-       XX   XX   @;lk @bsp #(; spc)  XX   @F13 @F12 @ul  XX
+       @udo @cut @cpy @pst XX   XX   XX   XX   XX   @F4  @F5  @F6  #(" " left)  #(" " left)
+       XX   XX  @dqlk @bsp @spc      @ret @F12 @F13 @ul  XX
+)
+
+(deflayer ada-bar
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   _    @,lk @;lk _    XX   XX        XX   XX   _    _    _    @dqlk XX
+  XX   _    _    _    _    XX   XX        XX   XX   _    _    _    _
+       XX   _    @qlk _    XX   XX   XX   XX   XX   _    _    _    XX
+       XX   XX   @del @bsp #(| spc)  @ret @t   @h   @g   XX
+)
+
+(deflayer ada-ampersand
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   _    @,lk @;lk _    XX   XX        XX   XX   _    _    _    @dqlk XX
+  XX   _    _    _    _    XX   XX        XX   XX   _    _    _    _
+       XX   _    @qlk _    XX   XX   XX   XX   XX   _    _    @2&  XX
+       XX   XX   @del @bsp #(& spc)  @ret @t   @h   @g   XX
 )

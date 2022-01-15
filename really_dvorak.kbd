@@ -1,10 +1,3 @@
-;; WORK IN PROGRESS - HALTED TO WORK ON GOLDENHAND
-
-;; Once again working. This time with a modified Hands Down Gold layout.
-;; Dubbed it the ADHD or advanced developer's hands down
-
-;;
-
 (defcfg
   ;; For Linux
   input  (device-file "/dev/input/event3")
@@ -12,7 +5,7 @@
     ;; To understand the importance of the following line, see the section on
     ;; Compose-key sequences at the near-bottom of this file.
     "sleep 1 && setxkbmap -option compose:rmeta")
-  cmp-seq rmeta    ;; Set the compose key to `RightMeta' since I don't have one... maybe this'll work
+  cmp-seq rmeta    ;; Set the compose key to `RightAlt'
   ;;cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
 
   ;; For Windows
@@ -50,13 +43,20 @@ Base Transparency
 )
 
 (defsrc
-  _  _    _    _    _    _    _         _    _    _    _    _    _    _      _
-  _  _    _    _    _    _    _         _    _    _    _    _    _    _
-  _  _    _    _    _    _    _         _    _    _    _    _    _
+  _  _    _    _    _    _         _    _    _    _    _    _    _    _      _
+  _  _    _    _    _    _         _    _    _    _    _    _    _    _
+  _  _    _    _    _    _         _    _    _    _    _    _    _
      _    _    _    _    _    _    _    _    _    _    _    _    _
      _    _    _    _         _    _    _    _    _    _
 )
 
+(defsrc
+  `    1    2    3    4    5         6    7    8    9    0    -    =    yen    bspc
+  tab  q    w    e    r    t         y    u    i    o    p    [    ]    ret
+  caps a    s    d    f    g         h    j    k    l    ;    '    \
+       lsft z    x    c    v    b    n    m    ,    .    /    ro   rsft
+       lctl lmet lalt muhenkan  spc henkan katakanahiragana ralt sysrq rctl
+)
 
 (defsrc
   `  1    2    3    4    5    6    7    8    9    0    -    =    yen    bspc
@@ -73,7 +73,11 @@ Base Transparency
   swi (tap-hold-next-release 300 yen (layer-toggle switch))
   qwe (layer-switch qwerty)
   hqw (layer-switch hard-qwerty)
-  adhd (layer-switch adhd)
+  rhq (layer-switch really-hard-qwerty)
+  lda (layer-switch lda)
+  sda (layer-switch sda)
+  ada (layer-switch ada)
+  bnk (layer-switch blank)
 )
 
 ;; qwerty autocaps and home row mod-taps
@@ -117,16 +121,15 @@ Base Transparency
   q_g (tap-hold 150 g G)
   q_h (tap-hold 150 h H)
 
-  q_j (tap-hold 150 j (tap-hold-next-release 300 J lmeta))
+  q_j (tap-hold 150 j (tap-hold-next-release 300 J rmeta))
   q_k (tap-hold 150 k (tap-hold-next-release 300 K rctrl))
-  q_l (tap-hold 150 l (tap-hold-next-release 300 L lalt))
+  q_l (tap-hold 150 l (tap-hold-next-release 300 L ralt))
   q_; (tap-hold 150 ; (tap-hold-next-release 300 : rshift))
 
   q_' (tap-hold 150 ' ")
   q_\ (tap-hold 150 \ |)
 
 	;; bottom row
-	q_lprn (tap-hold 150 \( (tap-hold-next-release 300 < (layer-toggle prn-caps)))
   q_z (tap-hold 150 z Z)
   q_x (tap-hold 150 x X)
   q_c (tap-hold 150 c C)
@@ -139,120 +142,197 @@ Base Transparency
   q_/ (tap-hold 150 / ?)
 
   q_ro ins
-  q_rprn (tap-hold 150 \) (tap-hold-next-release 300 > (layer-toggle prn-caps)))
 )
 
-(defalias ;; autocaps and home row mod-taps for adhd
+(defalias ;; ada autocaps and home row mod-taps
   ;; left hand
   ;;top row
-  ;;    tab tab
-  ,   (layer-next adhd-alt)
-  y   (tap-hold 150 y Y)
-  o   (tap-hold 150 o O)
-  u   (tap-hold 150 u U)
-  ;; home row
-  . (tap-hold-next-release 300 (layer-next adhd-dot) lshift)
-  i (tap-hold 150 i (tap-hold-next-release 300 I lalt))
-  a (tap-hold 150 a (tap-hold-next-release 300 A lctrl))
-  e (tap-hold 150 e (tap-hold-next-release 300 E lmeta))
-  ;; bottom row
-  : (tap-hold 150 : (tap-hold-next-release 300 ; (layer-toggle adhd-ctrl)))
+  . (tap-hold 150 . !)
+  ,L (tap-hold 150 (layer-next ada-comma) (tap-hold-next-release 300 ? (layer-toggle ada-comma)))
+  ;L (tap-hold 150 (layer-next ada-semicolon) (tap-hold-next-release 300 : (layer-toggle ada-semicolon)))
+  y (tap-hold 150 y Y)
   tab tab
+  ;; home row
+  a (tap-hold 150 a (tap-hold-next-release 300 A lshift))
+  o (tap-hold 150 o (tap-hold-next-release 300 O lalt))
+  e (tap-hold 150 e (tap-hold-next-release 300 E lctrl))
+  i (tap-hold 150 i (tap-hold-next-release 300 I lmeta))
+  ;; bottom row
+  |L (tap-hold 150 (layer-next ada-bar) (tap-hold-next-release 300 | (layer-toggle ada-bar)))
+  qL (tap-hold 150 (layer-next ada-q) (tap-hold-next-release 300 Q (layer-toggle ada-q)))
+  u (tap-hold 150 u U)
   ret ret
-	;; thumb keys
-	;; magic-meta
-	bspc bspc
-	spc spc
+  ;; thumbs
+  del del
+  bsp bspc
+  spc spc
 
   ;; right hand
   ;; top row
   p (tap-hold 150 p P)
-  h (tap-hold 150 h H)
-  g (tap-hold 150 g G)
-  ;; magic control
+	m (tap-hold 150 m M)
+	f (tap-hold 150 f F)
+	w (tap-hold 150 w W)
+	dqL (tap-hold 150 (layer-next ada-dblquote) (tap-hold-next-release 300 ' (layer-toggle ada-dblquote)))
   ;; home row
-  t (tap-hold 150 t (tap-hold-next-release 300 T lmeta))
+  d (tap-hold 150 d (tap-hold-next-release 300 D rmeta))
   n (tap-hold 150 n (tap-hold-next-release 300 N rctrl))
-  s (tap-hold 150 s (tap-hold-next-release 300 S lalt))
-  c (tap-hold 150 c (tap-hold-next-release 300 C rshift))
+  s (tap-hold 150 s (tap-hold-next-release 300 S ralt))
+  r (tap-hold 150 r (tap-hold-next-release 300 R rshift))
   ;; bottom row
-  d (tap-hold 150 d D)
-  m (tap-hold 150 m M)
-  & (tap-hold 150 & (tap-hold-next-release 300 | (layer-toggle adhd-meta)))
-  ;; thumb keys
-  r (tap-hold 150 r R)
-  l (tap-hold 150 l L)
+  c (tap-hold 150 c (tap-hold-next-release 300 C (layer-toggle ada-semicolon)))
+	l (tap-hold 150 l L)
+  &L (tap-hold 150 (layer-next ada-ampersand) (tap-hold-next-release 300 & (layer-toggle ada-ampersand)))
+  ;; thumb
+  t (tap-hold 150 t (tap-hold-next-release 300 T (layer-toggle ada-semicolon)))
+  h (tap-hold 150 h (tap-hold-next-release 300 H (layer-toggle ada-q)))
+  g (tap-hold 150 g (tap-hold-next-release 300 G (layer-toggle ada-comma)))
 )
 
-(defalias ;; secondary letters for altgr/dot layer
+(defalias ;; autoshift aliases for ada-comma
+	f@o #(f i n @ o f l a h e r t y . i s)
+	,re #(, return)
+	,ta #(, tab)
+	,sp #(, space)
+	, (tap-hold 150 , ?)
+)
 
+
+(defalias ;; ada-q
   ;; left hand
-  q (tap-hold 150 q Q)  ;; q on u
-  j (tap-hold 150 j J)  ;; j on i
-  x (tap-hold 150 x X)  ;; x on a
-  z (tap-hold 150 z Z)  ;; z on e
+  ;; top row
+  k (tap-hold 150 k K)
+	q (tap-hold 150 q Q)
+	qu #(q u)
+	v (tap-hold 150 v V)
+  ;; home row
+  esc esc
+  o@g #(o f l a h 3 r t y @ g m a i l . c o m)
+	ins insert
+	j (tap-hold 150 j J)
+	x (tap-hold 150 x X)
+	;; bottom row
+  cap caps
+  b (tap-hold 150 b B)
+  z (tap-hold 150 z Z)
+  ;; tab tab
+
   ;; right hand
-  b (tap-hold 150 b B)	;; b on t
-  v (tap-hold 150 v V)	;; v on n
-  f (tap-hold 150 f F)	;; f on s
-  ;; right thumb
-  w (tap-hold 150 w W)	;; w on r
-  k (tap-hold 150 k K)	;; k on l
+  ;; top row
+  ;; top row
+  7 (tap-hold 150 7 &)
+  8 (tap-hold 150 8 *)
+  9 (tap-hold 150 9 \()
+  ;; home row
+  1 (tap-hold 150 1 !)
+  2 (tap-hold 150 2 @)
+  3 (tap-hold 150 3 #)
+  0 (tap-hold 150 0 \))
+  ;; bottom row
+  4 (tap-hold 150 4 $)
+  5 (tap-hold 150 5 %)
+  6 (tap-hold 150 6 ^)
+  ;; thumbs
+  qsp #(q space)
+  qre #(q return)
+  00 #(0 0)
+  poi (tap-hold 150 . ,)
 )
 
+(defalias ;; ada-semicolon
+  ;; left hand
+  ;; top row
+  ;; . (tap-hold 150 . !)
+  / (tap-hold 150 / \\)
+  2: #(: :)
+  2* #(* *)
+  @ (tap-hold 150 @ #)
+  ;; home row
+  % (tap-hold 150 % $)
+  2; #(; ;)
+  2# #(# #)
+  ;; bottom row
+  ; (tap-hold 150 ; :)
+  2- #(- -)
+  ;re #(; ret)
+  ;ta #(; tab)
 
-(defalias ;; other stuff
-  CZ (tap-next-release C-Z lmeta)
-  Ch (tap-next-release C-h lctrl)
-  Cx (tap-next-release C-x lalt)
-  Cv (tap-next-release C-v lshift)
-
-  ;; ctrl/alt/meta One-Shot-LAYER on tap, modifier on hold,
-  ;; layer-lock on double tap, tap any to release lock
-  ctl (tap-hold-next-release 300 (layer-next adhd-ctrl) (around-next lctrl))
-  alt (tap-hold-next-release 300 (layer-next adhd-alt) (around-next lalt))
-  met (tap-hold-next-release 300 (layer-next adhd-meta) (around-next lmeta))
-  dlk (layer-switch adhd-dot-lock)
-  drm (layer-switch adhd)
-  clk (layer-switch adhd-ctrl-lock)
-  crm (layer-switch adhd)
-  alk (layer-switch adhd-alt-lock)
-  arm (layer-switch adhd)
-  mlk (layer-switch adhd-meta-lock)
-  mrm (layer-switch adhd)
+  ;; right hand
+  ;;top row
+  lbr (tap-hold 150 [ {)
+  dq (tap-hold 150 " ^)
+  und (tap-hold 150 \_ =)
+  rbr (tap-hold 150 ] })
+  ;; home row
+  lpn (tap-hold 150 \( <)
+  ' (tap-hold 150 ' `)
+  - (tap-hold 150 - ~)
+  rpn (tap-hold 150 \) >)
+  ;; bottom row
+  ;; / (tap-hold 150 / \\)
+  ~ (tap-hold 150 ~ *)
+  2. #(. .)
 )
 
-;; actual aliases
-(defalias
-  2; #(; ; spc)
-  2| #(| | spc)
-  2& #(& & spc)
-  2, #(, ,)
-  3. #(. . .)
-  ../ #(. . /)
-  qu #(q u)
-  Qu #(Q u)
-  alp (tap-hold 150 \( < )
-  arp (tap-hold 150 \) > )
-  alb (tap-hold 150 [ { )
-  arb (tap-hold 150 ] } )
-  
+(defalias ;; ada-dblquote aliases
+  ;; left hand
+  udo C-z
+  cut C-x
+  cpy C-c
+  pst C-v
+
+  F1 (tap-hold 150 F1 (tap-hold-next-release 300 S-F1 lmeta))
+  F2 (tap-hold 150 F2 (tap-hold-next-release 300 S-F2 lctrl))
+  F3 (tap-hold 150 F3 (tap-hold-next-release 300 S-F3 lalt))
+  F4 (tap-hold 150 F4 S-F4)
+  F5 (tap-hold 150 F5 S-F5)
+  F6 (tap-hold 150 F6 S-F6)
+  F7 (tap-hold 150 F7 S-F7)
+  F8 (tap-hold 150 F8 S-F8)
+  F9 (tap-hold 150 F9 S-F9)
+  F10 (tap-hold 150 F11 (tap-hold-next-release 300 S-F10 lshift))
+  F11 (tap-hold 150 F10 S-F11)
+  F12 (tap-hold 150 F12 S-F12)
+  F13 (tap-hold 150 F13 S-F13)
+)
+
+(defalias ;; layer locks and unlocks
+  ,lk (layer-switch ada-comma)
+  ;lk (layer-switch ada-semicolon)
+  qlk (layer-switch ada-q)
+  dqlk (layer-switch ada-dblquote)
+  ul (layer-switch ada)
+)
+
+(defalias ;; | &| &
+  2| #(| |)
+  2& #(& &)
+  | (tap-hold 150 | \\)
+)
+
+(deflayer blank
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX
+       XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+       XX   XX   XX   XX   XX        XX   XX   XX   XX   XX
 )
 
 (deflayer switch
-  `     @qwe @hqw 3    4    5    6    7    8    9    0    -    @adhd @swi bspc
+  `     @qwe @hqw @rhq @bnk 5    6    7    8    9    @lda @sda @ada @swi bspc
   tab   q    w    e    r    t    y    u    i    o    p    [    ]    ret
   caps  a    s    d    f    g    h    j    k    l    ;    '    \
   lsft  z    x    c    v    b    n    m    ,    .    /    @q_ro rsft
   lctl lmet lalt muhenkan  spc  henkan  katakanahiragana  ralt sysrq rctl
 )
 
+
 (deflayer qwerty
   @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi _
    _   @q_q @q_w @q_e @q_r @q_t      @q_y @q_u @q_i @q_o @q_p @q_[ @q_] _
    _   @q_a @q_s @q_d @q_f @q_g      @q_h @q_j @q_k @q_l @q_; @q_' @q_\
 	 _   @q_z @q_x @q_c @q_v @q_b @q_n @q_m @q_, @q_. @q_/ @q_ro _
-			 _   _   _  bspc @spc          _    @alt    @.   _  _
+			 _   _   _  bspc @spc          _    alt    @.   _  _
 
 )
 
@@ -260,88 +340,87 @@ Base Transparency
   @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi XX
   XX   @q_q @q_w @q_e @q_r @q_t      @q_y @q_u @q_i @q_o @q_p @q_[ @q_] ret
   XX   @q_a @q_s @q_d @q_f @q_g      @q_h @q_j @q_k @q_l @q_; @q_' @q_\
-	XX   @q_z @q_x @q_c @q_v @q_b @q_n @q_m @q_, @q_. @q_/ @q_ro XX
-			 XX   XX   XX   bspc @spc      XX   @alt @.   print  XX
-
+  XX   @q_z @q_x @q_c @q_v @q_b @q_n @q_m @q_, @q_. @q_/ @q_ro XX
+			 XX   XX   tab  bspc @spc      ret  XX   alt  print  XX
 )
 
-(deflayer prn-caps
-  _    _    _    _    _    _    _         _    _    _    _    _    _    _      _
-  _    _    _    _    _    _    _         _    _    _    _    _    _    _
-  _    _    _    _    _    _    _         _    _    _    _    _    _
-       caps _    _    _    _    _    _    _    _    _    _    _    caps
-       _    _    _    _         _    _    _    _    _    _
-)
-
-(deflayer adhd
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX  @,   @y   @o   @u   XX   XX        XX   XX   @p   @h   @g   @ctl XX
-  XX  @.   @i   @a   @e   XX   XX        XX   XX   @t   @n   @s   @c
-      XX   @:   tab  ret  XX   XX   XX   XX   XX   @d   @m   @&   XX
-      XX   XX   @met bspc @spc      XX   @r   @l   @alt XX
-)
-
-(deflayer adhd-dot
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   ;    ~    /   @q   XX   XX        XX   XX   @alp @arp \_   @ctl XX
-  XX   .   @j   @x   @z   XX   XX        XX   XX   @b   @v   @f   =
-      XX   @../ tab  ret  XX   XX   XX   XX   XX   @alb @arb  -   XX
-      XX   XX   @met bspc #( . spc ) XX  @w   @k   @alt XX
-)
-
-(deflayer adhd-dot-lock
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   ;    ~    /   @q   XX   XX        XX   XX   @alp @arp \_   @crm XX
-  XX   .   @j   @x   @z   XX   XX        XX   XX   @b   @v   @f   @w
-      XX   @../ tab  ret  XX   XX   XX   XX   XX   @alb @arb  -   XX
-      XX   XX   @mrm bspc #( . spc ) XX  @drm @k   @arm XX
+(deflayer really-hard-qwerty
+  @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi XX
+  XX   @q_q @q_w @ret @q_r @q_t      @q_y @q_u @q_i @q_o @q_p @q_[ @q_] ret
+  XX   @q_a @q_s @q_d @q_f @q_g      @q_h @q_j @q_k @q_l @q_; @q_' @q_\
+  XX   @q_z @q_x @q_c @q_v @q_b @q_n @q_m @q_, @q_. @q_/ @q_ro XX
+			 XX   XX   tab  bspc @spc      @q_e XX   alt  print  XX
 )
 
 
-(deflayer adhd-alt ;; & adhd-comma
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   ?    @    '   \_   XX   XX        XX   XX    &    *   \(   @clk XX
-  XX   !    #    "    -   XX   XX        XX   XX    !    @    #   \)
-      XX   XX   tab  ret  XX   XX   XX   XX   XX    $    %    ^   XX
-      XX   XX   @mlk bspc #( , spc ) XX  @r   @l   @alk XX
+(deflayer lda
+  @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi _
+  _    @'   @,L  @.   @p   @y   @f        @g   @c   @r   @l   _    _    _
+  _    @a   @o   @e   @i   @u   @d        @h   @t   @n   @s   @dqL _
+       @|L  @;L  @q   @j   @k   @x   @b   @m   @w   @v   @z   @/   _
+       XX   XX   @del @bsp @spc      @ret @r   @l   @,L  XX
 )
 
-(deflayer adhd-alt-lock ;; & adhd-comma
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   ?    @    '   \_   XX   XX        XX   XX    &    *   \(   @crm XX
-  XX   !    #    "    -   XX   XX        XX   XX    !    @    #   \)
-      XX   XX   tab  ret  XX   XX   XX   XX   XX    $    %    ^   XX
-      XX   XX   @mrm bspc #( , spc ) XX  @r   @l   @arm XX
+(deflayer sda
+  @q_` @q_1 @q_2 @q_3 @q_4 @q_5 @q_6 @q_7 @q_8 @q_9 @q_0 @q_- @q_= @swi _
+  _    @'   @,L  @.   @p   @y   XX        XX   @f   @g   @c   @;L  @&L  @dqL
+  _    @a   @o   @e   @i   @u   XX        XX   @d   @h   @t   @n   @s
+       @|L  @q   @j   @k   @x   XX   XX   XX   @b   @m   @w   @v   @z
+       _    _    @del @bsp @spc      @ret @r   @l   @,L  _
 )
 
-(deflayer adhd-meta ;; & adhd-ampersand
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   $    <    =    >   XX   XX        XX   XX    7    8    9   @clk XX
-  XX   +    *    -    /   XX   XX        XX   XX    1    2    3    0
-      XX   XX   tab  ret  XX   XX   XX   XX   XX    4    5    6   XX
-      XX   XX   @mlk bspc  spc      XX   ,    .    @alk XX
+(deflayer ada
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   @.   @qL  @u   @,L  XX   XX        XX   XX   @d   @g   @c   @;L  XX
+  XX   @a   @o   @e   @i   XX   XX        XX   XX   @h   @t   @n   @s
+			 @;L  @ret @tab @y   XX   XX   XX   XX   XX   @m   @w   @&L  @dqL
+       XX   XX   @del @bsp @spc      @ret @t   @h   @g   XX
+) ;; moved off - bkvxjz - fix for new
+
+(deflayer ada-comma
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   XX   XX   XX   @,   XX   XX        XX   XX   XX   XX   XX   XX   XX
+  XX   lsft lalt lctrl lmeta XX   XX      XX   XX   @b   @z   @x   @v
+       XX   @,re @,ta XX   XX   XX   XX   XX   XX   @k   @j   XX   XX
+       XX   XX   @,lk @bsp @,sp      @,re @t   @h   @ul  XX
 )
 
-(deflayer adhd-meta-lock
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX   $    <    =    >   XX   XX        XX   XX    7    8    9   @crm XX
-  XX   +    *    -    /   XX   XX        XX   XX    1    2    3    0
-      XX   XX   tab  ret  XX   XX   XX   XX   XX    4    5    6   XX
-      XX   XX   @mrm bspc  spc      XX   ,    .    @arm XX
+(deflayer ada-semicolon
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   @.   @/   @2:  @2*  XX   XX        XX   XX   @lbr @dq  @und @rbr XX
+  XX   @@   @%   @2;  @2#  XX   XX        XX   XX   @lpn @'   @-   @rpn
+       @;   @;re @;ta XX   XX   XX   XX   XX   XX   @/   @~   @2.  XX
+       XX   XX   @;lk @bsp #(; spc)  @;re @t   @h   @ul  XX
 )
 
-(deflayer adhd-ctrl ;; & adhd-colon
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX  pgup home up   end  XX   XX        XX   XX   C-z  C-f  C-c  @clk XX
-  XX  pgdn left down rght XX   XX        XX   XX   @CZ  @Ch  @Cx  @Cv
-      XX   XX   tab  ret  XX   XX   XX   XX   XX   C-a  C-b  XX   XX
-      XX   XX   @mlk bspc spc       XX   @r   @l   @alk XX
+(deflayer ada-q
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   @k   @q   @qu  @v   XX   XX        XX   XX   @7   @8   @9   @poi XX
+  XX   @esc @ins @j   @x   XX   XX        XX   XX   @1   @2   @3   @0
+       XX   @cap @b   @z   XX   XX   XX   XX   XX   @4   @5   @6   XX
+       XX   XX   @qlk @bsp @qsp      @qre @00  @poi @ul  XX
 )
 
-(deflayer adhd-ctrl-lock
-  XX  XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
-  XX  pgup home up   end  XX   XX        XX   XX   C-z  C-f  C-c  @crm XX
-  XX  pgdn left down rght XX   XX        XX   XX   @CZ  @Ch  @Cx  @Cv
-      XX   XX   tab  ret  XX   XX   XX   XX   XX   C-a  C-b  XX   XX
-      XX   XX   @mrm bspc spc       XX   @r   @l   @arm XX
+(deflayer ada-dblquote
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   pgup home up   end  XX   XX        XX   XX   @F7  @F8  @F9  @F10
+  XX   pgdn left down rght XX   XX        XX   XX   @F1  @F2  @F3  @F11
+       @udo @cut @cpy @pst XX   XX   XX   XX   XX   @F4  @F5  @F6  #(" " left)  #(" " left)
+       XX   XX  @dqlk @bsp @spc      @ret @F12 @F13 @ul  XX
+)
+
+(deflayer ada-bar
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   _    @,lk @;lk _    XX   XX        XX   XX   _    _    _    @dqlk XX
+  XX   _    _    _    _    XX   XX        XX   XX   _    _    _    _
+       XX   _    @qlk _    XX   XX   XX   XX   XX   _    _    _    XX
+       XX   XX   @del @bsp #(| spc)  @ret @t   @h   @g   XX
+)
+
+(deflayer ada-ampersand
+  XX   XX   XX   XX   XX   XX   XX        XX   XX   XX   XX   XX   XX   @swi XX
+  XX   _    @,lk @;lk _    XX   XX        XX   XX   _    _    _    @dqlk XX
+  XX   _    _    _    _    XX   XX        XX   XX   _    _    _    _
+       XX   _    @qlk _    XX   XX   XX   XX   XX   _    _    @2&  XX
+       XX   XX   @del @bsp #(& spc)  @ret @t   @h   @g   XX
 )
